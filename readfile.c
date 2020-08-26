@@ -20,7 +20,7 @@ int		**gridinit(int collen, int rowlen)
 	return (grid);
 }
 
-int lenfor_nextenter(int alreadyread)
+int		lenfor_nextenter(int alreadyread)
 {
     int		fd;
 	int     count;
@@ -128,7 +128,7 @@ int			collen(void)
 	return (num);
 }
 
-
+void	fillgrid(int	**grid_map, )
 
 int main(void)
 {
@@ -140,5 +140,4 @@ int main(void)
 	printf("%d\n", howmany_charbefore(3));
 	printf("%s\n", getcontents(1));
 	printf("%d\n", collen_atoi());
-
 }
