@@ -103,7 +103,7 @@ int	isvalid_map(char *symbol)
 
 int main()
 {
-	char symbol[3] = "o.x"
+	char symbol[3] = "o.x";
 
 	printf("%d", isvalid_map(symbol));
 	return 0;
