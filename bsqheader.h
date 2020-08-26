@@ -8,7 +8,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-char	g_filename[] = “test.txt”;
+char	g_filename[] = "test.txt";
 
 int		rowlen(int	rowindex);
 

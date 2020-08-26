@@ -1,7 +1,5 @@
 #include "bsqheader.h"
 
-char	g_filename[] = "test.txt";
-
 int		**gridinit(int collen, int rowlen)
 {
 	int **grid;
@@ -42,7 +40,7 @@ int		lenfor_nextenter(int alreadyread)
     return (-1);
 }
 
-int	howmany_charbefore(int	rowindex)
+int		howmany_charbefore(int	rowindex)
 {
 	int		i;
 	int		readstart;
@@ -59,7 +57,7 @@ int	howmany_charbefore(int	rowindex)
 	return (readstart);
 }
 
-int rowlen(int	rowindex)
+int		rowlen(int	rowindex)
 {
 	int readstart;
 
@@ -95,14 +93,14 @@ char	*getcontents(int rowindex)
 	return (0);
 }
 
-int			is_number(char c)
+int		is_number(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
 
-int			collen(void)
+int		collen(void)
 {
 	int		start;
 	int		end;
@@ -125,16 +123,82 @@ int			collen(void)
 	return (num);
 }
 
-void	fillgrid(int	**grid_map, )
+void	getsymbol(char *symbol)
+{
+	int		end;
+	char	*firstrow_contents;
+
+	firstrow_contents = getcontents(1);
+	end = rowlen(1) - 1;
+	symbol[2] = firstrow_contents[end];
+	symbol[1] = firstrow_contents[end - 2];
+	symbol[0] = firstrow_contents[end - 1];
+}
+
+int		symboltoint(char *symbol, char c)
+{
+	int		i;
+
+	i = 0;
+	while (i <= 2)
+	{
+		if (c == symbol[i])
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+void	fillgrid(int	**grid_map, char *symbol)
+{
+	int		col;
+	int		row;
+	int		col_end;
+	int		row_end;
+	char	*currentrow;
+
+	col = 0;
+	col_end = collen();
+	row_end = rowlen(2);
+	while (col < col_end)
+	{
+		currentrow = getcontents(col + 2); // mapfile의 두번 째 행부터 읽어야하니까
+		row = 0;
+		while(row < row_end)
+		{
+			grid_map[col][row] = symboltoint(symbol, currentrow[row]);
+			++row;
+		}
+		++col;
+	}
+}
 
 int main(void)
 {
 	int	**grid_test;
+	char symbol[3];
 
 	grid_test = gridinit(collen(),rowlen(2));
+	getsymbol(symbol);
+	fillgrid(grid_test, symbol);
 
-	printf("%d\n", rowlen(1));
+	printf("%d\n", rowlen(2));
 	printf("%d\n", howmany_charbefore(3));
 	printf("%s\n", getcontents(1));
-	printf("%d\n", collen_atoi());
+	printf("%d\n", collen());
+	printf("%c\n", symbol[2]);
+	int col = 0;
+	int row;
+
+	while (col < collen())
+	{
+		row = 0;
+		while (row < rowlen(2))
+		{
+			printf("%d",grid_test[col][row]);
+			row++;
+		}
+		printf("\n");
+		col++;
+	}
 }
