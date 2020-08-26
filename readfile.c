@@ -1,8 +1,5 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#define MAX_BUF 1024
+#include "bsqheader.h"
+
 char	g_filename[] = "test.txt";
 
 int		**gridinit(int collen, int rowlen)
