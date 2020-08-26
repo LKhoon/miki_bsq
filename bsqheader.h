@@ -10,7 +10,9 @@
 
 char	g_filename[] = "test.txt";
 
+char	*getcontents(int rowindex);
 int		rowlen(int	rowindex);
+int		collne(void);
 
 
 #endif
