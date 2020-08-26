@@ -15,6 +15,7 @@ for (my $i = 0; $i < $y; $i++) {
 			}
 			else {
 				print "."; 
-				}
+			}
+		}
+	print "\n";
 }
-print "\n"; }
