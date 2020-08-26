@@ -70,7 +70,6 @@ int rowlen(int	rowindex)
 	return (lenfor_nextenter(readstart) - 1);
 }
 
-
 char	*getcontents(int rowindex)
 {
 	char	buf[MAX_BUF];
@@ -99,10 +98,47 @@ char	*getcontents(int rowindex)
 	return (0);
 }
 
+int			is_number(char c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
+int			collen(void)
+{
+	int		start;
+	int		end;
+	int		num;
+	char	*firstrow_contents;
+
+	firstrow_contents = getcontents(1);
+	start = 0;
+	end = rowlen(1) - 4;
+	num = 0;
+	while (start <= end)
+	{
+		if (!is_number(firstrow_contents[start]))
+			return (-1);
+		else
+		{
+			num = num * 10 + firstrow_contents[start++] - '0';
+		}
+	}
+	return (num);
+}
+
+
 
 int main(void)
 {
+	int	**grid_test;
+
+	grid_test = gridinit(collen(),rowlen(2));
+
 	printf("%d\n", rowlen(1));
 	printf("%d\n", howmany_charbefore(3));
 	printf("%s\n", getcontents(1));
+	printf("%d\n", collen_atoi());
+
 }
