@@ -1,18 +1,15 @@
 #ifndef BSQHEADER
 # define BSQHEADER
 
-# define MAX_BUF 1024
-
 #include <stdio.h>
 #include <unistd.h>
-#include <fcntl.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
-char	g_filename[] = "test.txt";
+# define MAX_BUF 1024
 
 char	*getcontents(int rowindex);
 int		rowlen(int	rowindex);
-int		collne(void);
-
+int		collen(void);
 
 #endif

@@ -1,5 +1,7 @@
 #include "bsqheader.h"
 
+char	g_filename[] = "test.txt";
+
 int	find_line_end()
 {
 	int		fd;
@@ -47,6 +49,7 @@ int	symbolvalid(char *symbol)
 			return (0);
 		i++;
 	}
+	return (1);
 }
 
 int	boxvalid()
@@ -62,20 +65,20 @@ int	boxvalid()
 	else if (rowlen(1) < 1)
 		return (0);
 	// 끝 줄까지 반복해서 rowlen 체크 해서 길이 틀리면 not valid
-	temp = rolen(i++);
+	temp = rowlen(i++);
 	while (i <= collen())
 	{
-		if (rolen(i) != temp)
+		if (rowlen(i) != temp)
 			return(0);
 		i++;
 	}
+	return (1);
 }
 
 int	mapvalid(char *symbol)
 {
 	int		i;
 	int		j;
-	int		k;
 	char	*contents;
 
 	i = 2;
@@ -83,7 +86,7 @@ int	mapvalid(char *symbol)
 	{
 		j = 0;
 		contents = getcontents(i);
-		while (contents[j] != '\n')
+		while (contents[j] != '\0')
 		{
 			if (symbol[0] != contents[j] && symbol[1] != contents[j])
 				return (0);
@@ -105,6 +108,6 @@ int main()
 {
 	char symbol[3] = "o.x";
 
-	printf("%d", isvalid_map(symbol));
+	printf("\n%d", isvalid_map(symbol));
 	return 0;
 }

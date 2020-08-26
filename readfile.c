@@ -1,5 +1,7 @@
 #include "bsqheader.h"
 
+char	gg_filename[] = "test.txt";
+
 int		**gridinit(int collen, int rowlen)
 {
 	int **grid;
@@ -24,7 +26,7 @@ int		lenfor_nextenter(int alreadyread)
     char    buf[MAX_BUF];
 
 	result = 0;
-	fd = open(g_filename, O_RDONLY);
+	fd = open(gg_filename, O_RDONLY);
 	read(fd, buf, alreadyread);
     while ((temp = read(fd, buf, sizeof(buf))) > 0)
     {
@@ -74,7 +76,7 @@ char	*getcontents(int rowindex)
 	int 	fd;
 
 	contents = (char*)malloc(sizeof(char) * rowlen(rowindex) + 1);
-	fd = open(g_filename, O_RDONLY);
+	fd = open(gg_filename, O_RDONLY);
 	read(fd, buf, howmany_charbefore(rowindex));
 	while ((temp = read(fd, buf, sizeof(buf))) > 0)
 	{
@@ -173,32 +175,32 @@ void	fillgrid(int	**grid_map, char *symbol)
 	}
 }
 
-int main(void)
-{
-	int	**grid_test;
-	char symbol[3];
+// int main(void)
+// {
+// 	int	**grid_test;
+// 	char symbol[3];
 
-	grid_test = gridinit(collen(),rowlen(2));
-	getsymbol(symbol);
-	fillgrid(grid_test, symbol);
+// 	grid_test = gridinit(collen(),rowlen(2));
+// 	getsymbol(symbol);
+// 	fillgrid(grid_test, symbol);
 
-	printf("%d\n", rowlen(2));
-	printf("%d\n", howmany_charbefore(3));
-	printf("%s\n", getcontents(1));
-	printf("%d\n", collen());
-	printf("%c\n", symbol[2]);
-	int col = 0;
-	int row;
+// 	printf("%d\n", rowlen(2));
+// 	printf("%d\n", howmany_charbefore(3));
+// 	printf("%s\n", getcontents(1));
+// 	printf("%d\n", collen());
+// 	printf("%c\n", symbol[2]);
+// 	int col = 0;
+// 	int row;
 
-	while (col < collen())
-	{
-		row = 0;
-		while (row < rowlen(2))
-		{
-			printf("%d",grid_test[col][row]);
-			row++;
-		}
-		printf("\n");
-		col++;
-	}
-}
+// 	while (col < collen())
+// 	{
+// 		row = 0;
+// 		while (row < rowlen(2))
+// 		{
+// 			printf("%d",grid_test[col][row]);
+// 			row++;
+// 		}
+// 		printf("\n");
+// 		col++;
+// 	}
+// }
