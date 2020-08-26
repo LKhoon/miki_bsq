@@ -1,6 +1,6 @@
 #include "bsqheader.h"
 
-char	g_filename[] = "test.txt";
+char g_filename[] = "test.txt";
 
 int	find_line_end()
 {
@@ -104,10 +104,10 @@ int	isvalid_map(char *symbol)
 	return (0);
 }
 
-int main()
-{
-	char symbol[3] = "o.x";
+// int main()
+// {
+// 	char symbol[3] = "o.x";
 
-	printf("\n%d", isvalid_map(symbol));
-	return 0;
-}
+// 	printf("\n%d", isvalid_map(symbol));
+// 	return 0;
+// }

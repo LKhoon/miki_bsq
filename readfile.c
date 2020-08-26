@@ -1,7 +1,5 @@
 #include "bsqheader.h"
 
-char	gg_filename[] = "test.txt";
-
 int		**gridinit(int collen, int rowlen)
 {
 	int **grid;
@@ -26,7 +24,7 @@ int		lenfor_nextenter(int alreadyread)
     char    buf[MAX_BUF];
 
 	result = 0;
-	fd = open(gg_filename, O_RDONLY);
+	fd = open(g_filename, O_RDONLY);
 	read(fd, buf, alreadyread);
     while ((temp = read(fd, buf, sizeof(buf))) > 0)
     {
@@ -76,7 +74,7 @@ char	*getcontents(int rowindex)
 	int 	fd;
 
 	contents = (char*)malloc(sizeof(char) * rowlen(rowindex) + 1);
-	fd = open(gg_filename, O_RDONLY);
+	fd = open(g_filename, O_RDONLY);
 	read(fd, buf, howmany_charbefore(rowindex));
 	while ((temp = read(fd, buf, sizeof(buf))) > 0)
 	{
