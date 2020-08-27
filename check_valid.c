@@ -2,30 +2,6 @@
 
 char g_filename[] = "test.txt";
 
-int	find_line_end()
-{
-	int		fd;
-	int		count;
-	int		result;
-	int		temp;
-	char	buf[MAX_BUF];
-
-	result = 0;
-	fd = open(g_filename, O_RDONLY);
-	while ((temp = read(fd, buf, sizeof(buf))) > 0)
-	{
-		count = 0;
-		while (buf[count] != '\n' && count < temp)
-		{
-			count++;
-			result++;
-		}
-		if (buf[count] == '\n')
-			return (result);
-	}
-	
-	return (0);
-}
 // 심볼누락판단.
 // 심볼중복판다.
 // 심볼 출력 불가 문자 판단.
@@ -33,8 +9,8 @@ int	find_line_end()
 int	symbolvalid(char *symbol)
 {
 	int	i;
-
-	if (find_line_end() < 4) // 심볼투락판단.
+	printf("%d", rowlen(1));
+	if (rowlen(1) < 4) // 심볼투락판단.
 		return (0);
 	if (symbol[0] == symbol[1]) // 심볼중복판단.
 		return (0);
@@ -104,10 +80,10 @@ int	isvalid_map(char *symbol)
 	return (0);
 }
 
-// int main()
-// {
-// 	char symbol[3] = "o.x";
+int main()
+{
+	char symbol[3] = "o.x";
 
-// 	printf("\n%d", isvalid_map(symbol));
-// 	return 0;
-// }
+	printf("\n%d", isvalid_map(symbol));
+	return 0;
+}
