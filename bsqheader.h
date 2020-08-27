@@ -13,5 +13,6 @@ extern char	g_filename[];
 char	*getcontents(int rowindex);
 int		rowlen(int	rowindex);
 int		collen(void);
+void	print_bsq(int **grid_bsq, char *symbol, int *bslocation);
 
 #endif
