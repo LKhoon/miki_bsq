@@ -248,27 +248,27 @@ int main(void)
 	char symbol[3];
 	int bslocation[2];
 	int n;
-	n = 10;
+	n = 1000;
 
 	getsymbol(symbol);
-	printf("first row test :%d\n", rowlen(1));
-	printf("second row test :%d\n", rowlen(2));
-	printf("getcontetns test :%s\n", getcontents(1));
-	printf("collen test: %d\n", collen());
-	printf("filled test: %c\n", symbol[2]);
-	printf("empty test: %c\n", symbol[1]);
-	printf("janemull test: %c\n", symbol[0]);
+	printf("[TEST1]first row length is :%d\n", rowlen(1));
+	printf("[TEST2]second row length is :%d\n", rowlen(2));
+	printf("[TEST3]second length contents is :%s\n", getcontents(2));
+	printf("[TEST4]collum length is : %d\n", collen());
+	printf("[TEST5]check symbol : %s (barrier,space,fill)\n", symbol);
+	printf("[TEST6]howmany_char before last row is :%d\n", howmany_charbefore(n));
 
 	grid_map = gridinit(collen(), rowlen(2));
 	grid_bsq = gridinit(collen() + 1, rowlen(2) + 1);
-	printf("grid init check: %d\n", grid_bsq[n][n]);
+
+	printf("[TEST7]grid init check: 0 is ok :%d\n", grid_map[n-1][n-1]);
+	printf("[TEST8]grid init check: 0 is ok :%d\n", grid_bsq[n][n]);
 
 	fillgrid(grid_map, symbol);
-
-	printf("howmany_char test :%d\n", howmany_charbefore(n));
 	bsq(grid_bsq, grid_map, bslocation);
-	printf("The bslocation is : %d, %d \n", bslocation[0], bslocation[1]);
-	printf("The bigsquare size is : %d \n", grid_bsq[bslocation[0]][bslocation[1]]);
-	printf("the last element of grid_map :%d \n",grid_map[n - 1][n - 1]);
-	printf("the last element of grid_bsq :%d \n",grid_bsq[n][n]);
+
+	printf("[TEST9]The bslocation is : %d, %d \n", bslocation[0], bslocation[1]);
+	printf("[TEST10]The bigsquare size is : %d \n", grid_bsq[bslocation[0]][bslocation[1]]);
+	printf("[TEST11]the last element of grid_map :%d \n",grid_map[n - 1][n - 1]);
+	printf("[TEST12]the last element of grid_bsq :%d \n",grid_bsq[n][n]);
 }
