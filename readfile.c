@@ -23,8 +23,10 @@ int		**gridinit(int collen, int rowlen)
 	return (grid);
 }
 
-void	read_iter(int fd, char *buf, int alreadyread)
+void	read_iter(int fd, int alreadyread)
 {
+	char *buf[MAX_BUF];
+
 	while (alreadyread > 1024)					//// *에러 요인 파악, read 함수에 1024 이상 size 값 들어가면 프로그램 종료됨.
 	{
 		read(fd, buf, 1024);
@@ -43,7 +45,7 @@ int		lenfor_nextenter(int alreadyread)
 
 	result = 0;
 	fd = open(g_filename, O_RDONLY);
-	read_iter(fd, buf, alreadyread);
+	read_iter(fd, alreadyread);
     while ((temp = read(fd, buf, sizeof(buf))) > 0)
     {
         count = 0;
@@ -93,7 +95,7 @@ char	*getcontents(int rowindex)
 
 	contents = (char*)malloc(sizeof(char) * rowlen(rowindex) + 1);
 	fd = open(g_filename, O_RDONLY);
-	read_iter(fd, buf, howmany_charbefore(rowindex));
+	read_iter(fd, howmany_charbefore(rowindex));
 	while ((temp = read(fd, buf, sizeof(buf))) > 0)
 	{
 		count = 0;
@@ -148,7 +150,6 @@ void	getsymbol(char *symbol)
 	int		len;
 
 	len = rowlen(1);
-	end = 0;
 	firstrow_contents = getcontents(1);
 	end = len - 1;
 	symbol[2] = firstrow_contents[end];
