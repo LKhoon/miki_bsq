@@ -172,33 +172,43 @@ void	fillgrid(int	**grid_map, char *symbol)
 		++col;
 	}
 }
-
+/*
 int main(void)
 {
-	int	**grid_test;
+	int	**grid_map;
+	int **grid_bsq;
 	char symbol[3];
+	int bslocation[2];
 
-	grid_test = gridinit(collen(),rowlen(2));
+	grid_map = gridinit(collen(), rowlen(2));
+	grid_bsq = gridinit(collen() + 1, rowlen(2) + 1);
 	getsymbol(symbol);
-	fillgrid(grid_test, symbol);
+	fillgrid(grid_map, symbol);
+
+	bsq(grid_bsq, grid_map, bslocation);
+
+	int col = 1;
+	int row;
+
+	while (col <= collen())
+	{
+		row = 1;
+		while (row <= rowlen(2))
+		{
+			printf("%d",grid_bsq[col][row]);
+			row++;
+		}
+		printf("\n");
+		col++;
+	}
+	printf("The bslocation is : %d, %d", bslocation[0], bslocation[1]);
 
 	printf("%d\n", rowlen(2));
 	printf("%d\n", howmany_charbefore(3));
 	printf("%s\n", getcontents(1));
 	printf("%d\n", collen());
 	printf("%c\n", symbol[2]);
-	int col = 0;
-	int row;
 
-	while (col < collen())
-	{
-		row = 0;
-		while (row < rowlen(2))
-		{
-			printf("%d",grid_test[col][row]);
-			row++;
-		}
-		printf("\n");
-		col++;
-	}
+	return (0);
 }
+*/
