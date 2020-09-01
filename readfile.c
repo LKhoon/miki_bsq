@@ -37,27 +37,31 @@ void	read_iter(int fd, int alreadyread)
 
 int		lenfor_nextenter(int alreadyread)
 {
-    int		fd;
-	int     count;
-    int     result;
-    int     temp;
-    char    buf[MAX_BUF];
+	int		fd;
+	int	 count;
+	int	 result;
+	int	 temp;
+	char	buf[MAX_BUF];
 
 	result = 0;
 	fd = open(g_filename, O_RDONLY);
 	read_iter(fd, alreadyread);
-    while ((temp = read(fd, buf, sizeof(buf))) > 0)
-    {
-        count = 0;
-        while (buf[count] != '\n' && count < temp)
-        {
-            count++;
-            result++;
-        }
-        if (buf[count] == '\n')
-            return (result + 1);
-    }
-    return (-1);
+	while ((temp = read(fd, buf, sizeof(buf))) > 0)
+	{
+		count = 0;
+		while (buf[count] != '\n' && count < temp)
+		{
+			count++;
+			result++;
+		}
+		if (buf[count] == '\n')
+		{
+			close(fd);
+			return (result + 1);
+		}
+	}
+	close(fd);
+	return (-1);
 }
 
 int		howmany_charbefore(int	rowindex)
@@ -107,9 +111,11 @@ char	*getcontents(int rowindex)
 		if (buf[count] == '\n')
 		{
 			*contents = '\0';
+			close(fd);
 			return (contents - rowlen(rowindex));
 		}
 	}
+	close(fd);
 	return (0);
 }
 
@@ -161,6 +167,7 @@ int		symboltoint(char *symbol, char c)
 {
 	int		i;
 
+
 	i = 0;
 	while (i <= 2)
 	{
@@ -189,8 +196,11 @@ void	fillgrid(int **grid_map, char *symbol)
 		while(row < row_end)
 		{
 			grid_map[col][row] = symboltoint(symbol, currentrow[row]);
+			if (grid_map[col][row] == -1)
+				printf("GRIDMAP GET -1!!! ");
 			++row;
 		}
+		free(currentrow);
 		++col;
 	}
 }
@@ -241,6 +251,12 @@ int		*bsq(int **grid_bsq, int **grid_map, int *bslocation)
 	return (bslocation);
 }
 
+void	print
+
+
+
+
+
 int main(void)
 {
 	int	**grid_map;
@@ -248,12 +264,20 @@ int main(void)
 	char symbol[3];
 	int bslocation[2];
 	int n;
-	n = 1000;
+	n = 70;
+	int *ptr;
+	ptr = (int *)malloc(sizeof(int) * 2);
+	// int i = 0;
+	// ptr[4] = 30;
+	// while (i < 5)
+	// 	printf("%d\n", ptr[i++]);
+	// while (i < 257060)
+	// 	ptr[i++] = 50;
 
 	getsymbol(symbol);
 	printf("[TEST1]first row length is :%d\n", rowlen(1));
 	printf("[TEST2]second row length is :%d\n", rowlen(2));
-	printf("[TEST3]second length contents is :%s\n", getcontents(2));
+	printf("[TEST3]second length contents is :%c,%c,%c\n", getcontents(2)[0], getcontents(2)[1], getcontents(2)[2]);
 	printf("[TEST4]collum length is : %d\n", collen());
 	printf("[TEST5]check symbol : %s (barrier,space,fill)\n", symbol);
 	printf("[TEST6]howmany_char before last row is :%d\n", howmany_charbefore(n));
@@ -271,4 +295,37 @@ int main(void)
 	printf("[TEST10]The bigsquare size is : %d \n", grid_bsq[bslocation[0]][bslocation[1]]);
 	printf("[TEST11]the last element of grid_map :%d \n",grid_map[n - 1][n - 1]);
 	printf("[TEST12]the last element of grid_bsq :%d \n",grid_bsq[n][n]);
+	//grid_map 출력 테스트
+	int col = 0;
+	int row;
+
+	while (col < collen())
+	{
+		row = 0;
+		while (row < rowlen(2))
+		{
+			printf("%d",grid_map[col][row]);
+			row++;
+		}
+		printf("\n");
+		col++;
+	}
+
+	printf("\n\n\n");
+	//grid_bsq 출력 테스트
+	col = 1;
+
+	while (col <= collen())
+	{
+		row = 1;
+		while (row <= rowlen(2))
+		{
+			printf("%d",grid_bsq[col][row]);
+			row++;
+		}
+		printf("\n");
+		col++;
+	}
+	free(grid_bsq);
+	free(grid_map);
 }
