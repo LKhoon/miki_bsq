@@ -42,13 +42,22 @@
             "label": "save and compile for C",
             "command": "gcc",
             "args": [
-				"-g",
+                "-g",
 				"-Wall",
 				"-Werror",
 				"-Wextra",
-                "${file}",
+                "./srcs/*.c",
+                "-I./includes",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
+
+				// "-g",
+				// "-Wall",
+				// "-Werror",
+				// "-Wextra",
+                // "${file}",
+                // "-o",
+                // "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "group": "build",
 

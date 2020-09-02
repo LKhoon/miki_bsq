@@ -1,5 +1,4 @@
 #include "common.h"
-#include "readfile.h"
 
 int		**init_grid_bsq(int collen, int rowlen)
 {
@@ -49,16 +48,16 @@ char	**init_grid_map(int collen)
 	return (grid);
 }
 
-int		minval(int **grid_bsq, int col, int row)
+int		minval(int **bs, int col, int row)
 {
 	int		min;
 	int		left;
 	int		left_top;
 	int		top;
 
-	left = grid_bsq[col][row - 1];
-	left_top = grid_bsq[col - 1][row - 1];
-	top = grid_bsq[col - 1][row];
+	left = bs[col][row - 1];
+	left_top = bs[col - 1][row - 1];
+	top = bs[col - 1][row];
 	min = left;
 	if (left_top < min)
 		min = left_top;
@@ -67,7 +66,7 @@ int		minval(int **grid_bsq, int col, int row)
 	return (min);
 }
 
-int		*bsq(int **grid_bsq, char **grid_map, int *bslocation, int collen, char *symbol)
+int		*bsq(int **bs, char **map, int *bsl, int collen, char *symbol)
 {
 	int row;
 	int col;
@@ -82,22 +81,20 @@ int		*bsq(int **grid_bsq, char **grid_map, int *bslocation, int collen, char *sy
 		row = 0;
 		while (++row <= rowlen)
 		{
-			if (grid_map[col - 1][row - 1] == symbol[0])
-				grid_bsq[col][row] = 0;
-			else
-				grid_bsq[col][row] = minval(grid_bsq, col, row) + 1;
-			if (grid_bsq[col][row] > biggest)
+			bs[col][row] = (map[col - 1][row - 1] == symbol[0])
+			? 0 : minval(bs, col, row) + 1;
+			if (bs[col][row] > biggest)
 			{
-				biggest = grid_bsq[col][row];
-				bslocation[0] = col;
-				bslocation[1] = row;
+				biggest = bs[col][row];
+				bsl[0] = col;
+				bsl[1] = row;
 			}
 		}
 	}
-	return (bslocation);
+	return (bsl);
 }
 
-void	mark_square(char **grid_map, int **grid_bsq, char *symbol, int *bslocation)
+void	mark_square(char **map, int **bs, char *symbol, int *bsl)
 {
 	int	bssize;
 	int	row_now;
@@ -105,16 +102,16 @@ void	mark_square(char **grid_map, int **grid_bsq, char *symbol, int *bslocation)
 	int	row_end_vertex;
 	int	col_end_vertex;
 
-	bssize = grid_bsq[bslocation[0]][bslocation[1]];
-	col_now = bslocation[0] - bssize;
-	col_end_vertex = bslocation[0] - 1;
-	row_end_vertex = bslocation[1] - 1;
+	bssize = bs[bsl[0]][bsl[1]];
+	col_now = bsl[0] - bssize;
+	col_end_vertex = bsl[0] - 1;
+	row_end_vertex = bsl[1] - 1;
 	while (col_now <= col_end_vertex)
 	{
-		row_now = bslocation[1] - bssize;
+		row_now = bsl[1] - bssize;
 		while (row_now <= row_end_vertex)
 		{
-			grid_map[col_now][row_now] = symbol[2];
+			map[col_now][row_now] = symbol[2];
 			++row_now;
 		}
 		++col_now;
