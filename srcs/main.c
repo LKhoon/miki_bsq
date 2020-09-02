@@ -6,7 +6,7 @@
 /*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 17:18:20 by kihoonlee         #+#    #+#             */
-/*   Updated: 2020/09/02 18:15:32 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2020/09/02 20:49:32 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,12 @@ int		main(int argc, char **argv)
 	char	**grid_map;
 	int		**grid_bsq;
 	int		i;
+	clock_t start, end;
+	double	result;
 
 	grid_map = NULL;
 	grid_bsq = NULL;
+	start = clock();
 	if (argc == 1)
 	{
 		get_mapdata();
@@ -78,5 +81,8 @@ int		main(int argc, char **argv)
 			i++;
 		}
 	}
+	end = clock();
+	result = (double)(end - start) / (double)1000000;
+	printf("%f", result);
 	return (0);
 }

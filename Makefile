@@ -26,4 +26,5 @@ $(TARGET) : $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^
 $(OBJECTS) :
 	$(CC) $(CFLAGS) -c $(addprefix $(SRCS_DIR)/, $(SRCS)) $(INCLUDES)
+
 .PHONY : all clean fclean re

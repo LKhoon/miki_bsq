@@ -6,12 +6,11 @@
 /*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 18:16:51 by kihoonlee         #+#    #+#             */
-/*   Updated: 2020/09/02 18:17:07 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2020/09/02 21:05:16 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
-#include "readfile.h"
 
 int		is_number(char c)
 {

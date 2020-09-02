@@ -6,7 +6,7 @@
 /*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 17:19:02 by kihoonlee         #+#    #+#             */
-/*   Updated: 2020/09/02 18:15:57 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2020/09/02 21:04:28 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 int		check_filename()
 {
 	int	fd;
+	int name_len;
 
+	name_len = 0;
+	while (g_filename[name_len])
+		name_len++;
 	fd = open(g_filename, O_RDONLY);
 	if (fd < 0)
 	{
 		write(1,WRONG_FILE_MSG, sizeof(WRONG_FILE_MSG));
-		write(1, g_filename, sizeof(g_filename));
+		write(1, g_filename, name_len);
 		write(1, " ***", 4);
 		write(1, "\n\n", 2);
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: kihoonlee <kihoonlee@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 17:21:52 by kihoonlee         #+#    #+#             */
-/*   Updated: 2020/09/02 17:56:23 by kihoonlee        ###   ########.fr       */
+/*   Updated: 2020/09/02 21:00:19 by kihoonlee        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 void	print_bsq(char **grid_map, int collen)
 {
 	int col;
+	int rowlen;
 
+	rowlen = get_rowlen(2);
 	col = 0;
 	while (col < collen)
 	{
-		write(1, grid_map[col], get_rowlen(2) + 1);
+		write(1, grid_map[col], rowlen + 1);
 		col++;
 	}
 }
